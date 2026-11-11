@@ -13,7 +13,7 @@ DEVICE="${DEVICE:-cuda:6}"
 MODEL="${MODEL:-}"
 STEPS="${STEPS:-5000}"
 EVAL_EVERY="${EVAL_EVERY:-100}"
-# Total model calls, including the final call that records gradients.
+# Total model calls per reconstruction.
 RECURSIVE_STEPS="${RECURSIVE_STEPS:-50}"
 LR="${LR:-0.001}"
 RESULT_DIR="${RESULT_DIR:-results/2d_3}"

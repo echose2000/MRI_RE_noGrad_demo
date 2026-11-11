@@ -126,18 +126,12 @@ def prepare_sample(cfg, index, ops, device):
 
 
 def reconstruct(predict, kspace, steps, on_stage=None):
-    """Run steps model calls. During training, only the final call records gradients."""
-    # Evaluation uses on_stage to record each prediction. Training skips this callback.
-    with torch.no_grad():
-        for _ in range(steps - 1):
-            kspace = predict(kspace)
-            if on_stage is not None:
-                on_stage(kspace)
-
-    final = predict(kspace)
-    if on_stage is not None:
-        on_stage(final)
-    return final
+    """Run recurrent model calls in the caller's gradient mode."""
+    for _ in range(max(1, steps)):
+        kspace = predict(kspace)
+        if on_stage is not None:
+            on_stage(kspace)
+    return kspace
 
 
 @torch.no_grad()
@@ -201,7 +195,7 @@ def main(argv=None):
     # Initialize reporting with the reference and zero-filled images.
     sampling_rate = sample.input_mask.mean().item()
     print(f"{model_name} on {device} | sample {args.sample_index} | sampling rate {sampling_rate:.2%}")
-    print(f"{steps} optimizer updates | {recursive_steps - 1} warm-up calls + 1 final call")
+    print(f"{steps} optimizer updates | {recursive_steps} recurrent calls with gradients per update")
     zero_filled = kspace_to_image(ops, sample.undersampled, sample.csm)
     report = ReconstructionReport(sample.reference, zero_filled, recursive_steps, show=not args.no_show)
 
