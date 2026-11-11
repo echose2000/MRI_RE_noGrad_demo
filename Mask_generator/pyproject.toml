@@ -1,0 +1,9 @@
+[build-system]
+requires = ["setuptools>=42", "wheel", "cython", "numpy"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mask_generator"
+version = "0.1.0"
+description = "gaussian mask generator"
+requires-python = ">=3.12"

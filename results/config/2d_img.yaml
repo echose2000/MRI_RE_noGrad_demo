@@ -1,0 +1,18 @@
+
+seed: 24
+lr: 0.001
+pth: /home/shangwl/workspace/dataset/file1000098.h5
+
+model:
+  coils: 15
+  hidden_channels: 32
+  num_layers: 4
+  kernel_size: 3
+  iter_num: 1
+  share: False
+
+mask:
+  type: gaussian
+  acc: 4
+  acs: 24
+

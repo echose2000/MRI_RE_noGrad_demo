@@ -1,0 +1,35 @@
+[project]
+name = "demo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "einops>=0.8.1",
+    "h5py>=3.15.1",
+    "imageio>=2.37.2",
+    "mask-generator",
+    "matplotlib>=3.10.8",
+    "numpy>=2.4.0",
+    "pyyaml>=6.0.3",
+    "scipy>=1.16.3",
+    "torch>=2.9.1",
+    "torchmetrics>=1.8.2",
+    "tqdm>=4.67.1",
+]
+
+
+
+[[tool.uv.index]]
+# Optional name for the index. 
+name = "tsinghua"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+
+[tool.uv.workspace]
+members = [
+    "Mask_generator",
+]
+
+[tool.uv.sources]
+mask-generator = { workspace = true }

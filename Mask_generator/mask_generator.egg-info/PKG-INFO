@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: mask_generator
+Version: 0.1.0
+Summary: gaussian mask generator
+Requires-Python: >=3.12
